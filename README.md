@@ -5,7 +5,7 @@ Financial charting with Tom DeMark indicator overlay
 
 ![alt text](https://github.com/jonathansheets517/Demark_trading_indicator/blob/master/BTCDaily_Demark_4_9_23.png?raw=true)
 
-# Updated Readme @ 4/11/2023 from JonathaSheets517
+# Updated Readme @ 4/11/2023 from JonathanSheets517
 Chances are you're a smart buyside PM/Quant/Analyst that already knows how to analyze the TD countdown. Otherwise, you wouldn't have gone through the trouble to search this repo out. 
 
 If you're a Student/New Investor kudos for finding this repo - but you will need to DYR on TD. It is worth your time.
