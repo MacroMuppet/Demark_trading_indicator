@@ -1,12 +1,27 @@
 #!/usr/bin/python
 import pandas as pd
 import numpy as np
+import os
 
-#Import price data
-d = pd.read_csv('price_data.csv')
-#rename columns
-d.columns = ['Date','Open','High','Low',
-			'Close','Volume','MarketCap']
+# List CSV files in the current directory
+csv_files = [f for f in os.listdir() if f.endswith('.csv')]
+
+# Prompt the user to choose a CSV file
+print("Choose a CSV file:")
+for index, file in enumerate(csv_files):
+    print(f"{index + 1}. {file}")
+
+choice = int(input("Enter the number corresponding to your choice: ")) - 1
+chosen_csv = csv_files[choice]
+
+# Import price data
+d = pd.read_csv(chosen_csv)
+
+# Rename columns
+d.columns = ['Date', 'Open', 'High', 'Low',
+             'Close', 'Volume', 'MarketCap']
+
+data = d.iloc[::-1]
 
 data = d.iloc[::-1]
 

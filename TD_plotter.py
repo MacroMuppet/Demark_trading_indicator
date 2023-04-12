@@ -4,39 +4,78 @@ import requests
 import json
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-from matplotlib.finance import candlestick_ohlc as candlestick
+#from matplotlib.finance import candlestick_ohlc as candlestick
+import mplfinance
+from mplfinance.original_flavor import candlestick_ohlc as candlestick
 from matplotlib import style
 import re
 import pandas as pd
 import numpy as np
 
 #import historical price data
-dat  = pd.DataFrame(pd.read_csv('price_data.csv'))
+#dat  = pd.DataFrame(pd.read_csv('price_data.csv'))
+
 #rename columns
-dat.columns = ['Date','Open','High','Low',
-                'Close','Volume','MarketCap']
+#dat.columns = ['Date','Open','High','Low',
+#                'Close','Volume','MarketCap']
 #reverse dataFrame order for all cols along index axis
+#data = dat.iloc[::-1]
+
+#btcPrice not defined
+#btcPrice = data.iloc[-1]['Close']
+
+# List CSV files in the current directory
+csv_files = [f for f in os.listdir() if f.endswith('.csv')]
+
+# Prompt the user to choose a CSV file
+print("Choose a CSV file:")
+for index, file in enumerate(csv_files):
+    print(f"{index + 1}. {file}")
+
+choice = int(input("Enter the number corresponding to your choice: ")) - 1
+chosen_csv = csv_files[choice]
+
+# Import historical price data
+dat = pd.DataFrame(pd.read_csv(chosen_csv))
+
+# Rename columns
+dat.columns = ['Date', 'Open', 'High', 'Low',
+               'Close', 'Volume', 'MarketCap']
+
+# Reverse DataFrame order for all cols along the index axis
 data = dat.iloc[::-1]
+
+# btcPrice not defined
+btcPrice = data.iloc[-1]['Close']
+
+
+# Fetch current price
+def getPrice():
+    # global btcPrice
+    btcPrice = data.iloc[-1]['Close']
+
+
 
 #fetch current price
 def getPrice():
-    global btcPrice
-    #bitstamp = 'https://bitstamp.net/api/ticker/'
-    cmc = 'https://api.coinmarketcap.com/v1/ticker/bitcoin/'
-    try:
-        req = requests.get(cmc)
-        price = float(json.loads(req.text)[0]['price_usd'])
-        btcPrice = "%.2f" % price
+    #global btcPrice
+    btcPrice = data.iloc[-1]['Close']
+	#bitstamp = 'https://bitstamp.net/api/ticker/'
+    #cmc = 'https://api.coinmarketcap.com/v1/ticker/bitcoin/'
+    #try:
+    #    req = requests.get(cmc)
+    #    price = float(json.loads(req.text)[0]['price_usd'])
+    #    btcPrice = "%.2f" % price
     #if unable to connect, use latest data from spreadsheet
-    except requests.ConnectionError:
-        btcPrice = data.iloc[-1]['Close']
+    #except requests.ConnectionError:
+        #btcPrice = data.iloc[-1]['Close']
 
 def main():
     #prompt user for number of candles to display
     print('\n\nYou have ' + str(len(data)-51) +
         ' candles available to view.\nEnter "0" to view all.\n')
     while True:
-        toShow = raw_input('How many candles to display? ')
+        toShow = input('How many candles to display? ')
         if toShow == "0":
             toShow = int(len(data)-51)
             print("\tGenerating plot now...")
@@ -223,6 +262,40 @@ def main():
 
     twentyeightDayVol=[emas.iloc[i]["twentyeightDayVol"] for i in range(0,len(emas))]
 
+    # reversing data lists
+    o = o[::-1]
+    h = h[::-1]
+    l = l[::-1]
+    c = c[::-1]
+    vol = vol[::-1]
+
+    # reversing the other lists
+    tenEMA = tenEMA[::-1]
+    twelveEMA = twelveEMA[::-1]
+    twentysixEMA = twentysixEMA[::-1]
+    thirtyEMA = thirtyEMA[::-1]
+    fiftyEMA = fiftyEMA[::-1]
+    sixtyEMA = sixtyEMA[::-1]
+    onetwentyEMA = onetwentyEMA[::-1]
+    tenDay = tenDay[::-1]
+    twelveDay = twelveDay[::-1]
+    twentysixDay = twentysixDay[::-1]
+    thirtyDay = thirtyDay[::-1]
+    fiftyDay = fiftyDay[::-1]
+    sixtyDay = sixtyDay[::-1]
+    onetwentyDay = onetwentyDay[::-1]
+
+    shortVal = shortVal[::-1]
+    longVal = longVal[::-1]
+    sellVal = sellVal[::-1]
+    buyVal = buyVal[::-1]
+    agsellVal = agsellVal[::-1]
+    agbuyVal = agbuyVal[::-1]
+    macd = macd[::-1]
+    twentyeightDayVol = twentyeightDayVol[::-1]
+    t = t[::-1]
+
+
     #truncate data sets based on user input for number of candles
     d = len(c) - toShow
     if d > 1:
@@ -266,11 +339,17 @@ def main():
         ohlc.append(append_it)
         x+=1
 
+
+
     #begin plot code...
     style.use('fivethirtyeight')
     fig = plt.figure()
 
     ax1 = plt.subplot2grid((1,1), (0,0)) #((dimensions), (define origin))
+    
+    #adds copy of Price LHS axis to RHS axis
+    ax1R = ax1.twinx()
+    ax1R.set_ylim(ax1.get_ylim())
 
     #display only every 3rd x-axis label
     ax1.xaxis.set_ticks(np.arange(0,len(o),3.0))
@@ -333,11 +412,11 @@ def main():
             color='#01DF01', weight='bold')
         #insert arrows when countdown completes
         if agsellVal[z] == 13:
-            plt.arrow(z, l[z]/1.07, 0.0, -100, fc="red",
-            ec="red", head_width=0.8, head_length=150)
+            plt.arrow(z, l[z]*1.27, 0.0, -100, fc="red",
+            ec="red", head_width=1.8, head_length=950)
         if agbuyVal[z] == 13:
-            plt.arrow(z, h[z]*1.07, 0.0, 100, fc="green",
-            ec="green", head_width=0.8, head_length=150)
+            plt.arrow(z, h[z]/1.27, 0.0, 100, fc="green",
+            ec="green", head_width=1.8, head_length=950)
 
     #display td setup values
     for r in range(0,len(c)):
@@ -351,11 +430,11 @@ def main():
             size=10,weight='bold')
         #insert arrows when setup completes
         if shortVal[r] == 9:
-             plt.arrow(r, h[r]*1.04, 0.0, -100, fc="#FA5858",
-             ec="#FA5858", head_width=0.8, head_length=150)
+             plt.arrow(r, h[r]*1.24, 0.0, -100, fc="#FA5858",
+             ec="#FA5858", head_width=0.8, head_length=950)
         if longVal[r] == 9:
-           plt.arrow(r, l[r]/1.08, 0.0, 100, fc="#58FA58",
-           ec="#58FA58", head_width=0.8, head_length=150)
+           plt.arrow(r, l[r]/1.04, 0.0, 100, fc="#58FA58",
+           ec="#58FA58", head_width=0.8, head_length=950)
 
     #display the latest price next to final candle
     if btcPrice < last:
@@ -380,16 +459,17 @@ def main():
     COMMENT/UNCOMMENT ANNOTATE-PLOT PAIRS BELOW TO ADD/REMOVE 
     MOVING AVERAGES AND EXPONENTIAL MOVING AVERAGES
     """
-    ax1.annotate("10 day EMA", xy = (r[-1]/1.1, h[idx_max]*1.02),
-        xytext= (r[-1]/1.1, h[idx_max]*1.02),
-        color='purple', size=10, weight='bold')
-    ax1.plot(r,tenEMA, color="purple", linewidth="1.5")
+    "10day and 30day ema moving averages are calculated backwards below"
+    #ax1.annotate("10 day EMA", xy = (r[-1]/1.1, h[idx_max]*1.02),#BACKWARDS
+    #    xytext= (r[-1]/1.1, h[idx_max]*1.02),
+    #    color='purple', size=10, weight='bold')
+    #ax1.plot(r,tenEMA, color="purple", linewidth="1.5")
 
-    ax1.annotate("30 day EMA", xy = (r[-1]/1.1, h[idx_max]*0.98),
-        xytext= (r[-1]/1.1, h[idx_max]*0.98),
-        color='blue', size=10, weight='bold')
-    ax1.plot(r,thirtyEMA, color="blue", linewidth="1.5")
-
+    #ax1.annotate("30 day EMA", xy = (r[-1]/1.1, h[idx_max]*0.98),#BACKWARDS
+    #    xytext= (r[-1]/1.1, h[idx_max]*0.98),
+    #    color='blue', size=10, weight='bold')
+    #ax1.plot(r,thirtyEMA, color="blue", linewidth="1.5")
+    
     #ax1.annotate("50 day EMA", xy = (r[-1]/1.1, h[idx_max]*0.94),
     #    xytext= (r[-1]/1.1, h[idx_max]*0.94),
     #    color='green', size=10, weight='bold')
