@@ -2,7 +2,7 @@
 
 ## Tom-Demark-Indicator
 Financial charting with Tom DeMark indicator overlay
-
+![alt text](https://github.com/jonathansheets517/Demark_trading_indicator/blob/master/.png?raw=true)
 # Updated Readme @ 4/11/2023 from JonathaSheets517
 Chances are you're a smart buyside PM/Quant/Analyst that already knows how to analyze the TD countdown. Otherwise, you wouldn't have gone through the trouble to search this repo out. 
 
