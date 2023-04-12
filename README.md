@@ -10,7 +10,8 @@ Chances are you're a smart buyside PM/Quant/Analyst that already knows how to an
 
 If you're a Student/New Investor kudos for finding this repo - but you will need to DYR on TD. It is worth your time.
 
-![alt text](https://github.com/jonathansheets517/Demark_trading_indicator/blob/master/TY future covid timeframe.png?raw=true)
+
+![alt text](https://github.com/jonathansheets517/Demark_trading_indicator/blob/master/TY%20future%20covid%20timeframe.png?raw=true)
 
 **Step 1** - I recommend sourcing free historical crypto data from [CoinGeckoAPI](https://www.coingecko.com/en/api/documentation) combined with OHLC data from [Alpha Vantage API Key Generator](https://www.alphavantage.co/support/#api-key). **You'll need a free API key from alphaVantage.**
 
