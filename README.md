@@ -5,7 +5,7 @@ Financial charting with Tom DeMark indicator overlay
 
 
 
-*Step 1* - I recommend sourcing free historical crypto data from [CoinGeckoAPI](https://www.coingecko.com/en/api/documentation) combined with OHLC data from [Alpha Vantage API Key Generator](https://www.alphavantage.co/support/#api-key). You'll need a free API key from alphaVantage.
+~Step 1~ - I recommend sourcing free historical crypto data from [CoinGeckoAPI](https://www.coingecko.com/en/api/documentation) combined with OHLC data from [Alpha Vantage API Key Generator](https://www.alphavantage.co/support/#api-key). You'll need a free API key from alphaVantage.
 
 *Step 2* - Place all files in this repo into a common directory on your pc, set it as your current working directory
 
