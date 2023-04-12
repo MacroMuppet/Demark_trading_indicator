@@ -69,7 +69,7 @@ def get_coin_data(coin_id, coin_symbol, api_key):
     return parsed_data
 
 def main():
-    api_key = 'UHRVGT6PTACQI7DM'  # Replace with your actual Alpha Vantage API key
+    api_key = 'GET YOUR OWN API KEY'  # Replace with your actual Alpha Vantage API key
 
     print("Please choose a cryptocurrency:")
     print("Enter 1   for Bitcoin")
