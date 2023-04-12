@@ -8,7 +8,9 @@ Financial charting with Tom DeMark indicator overlay
 # Updated Readme @ 4/11/2023 from JonathaSheets517
 Chances are you're a smart buyside PM/Quant/Analyst that already knows how to analyze the TD countdown. Otherwise, you wouldn't have gone through the trouble to search this repo out. 
 
-If you're a Student/New Investor kudos for finding this repo - but you will need to DYR on TD. It is worth your time. I've used DeMark counts since I was a tiger cub summer analyst in 2013.   
+If you're a Student/New Investor kudos for finding this repo - but you will need to DYR on TD. It is worth your time.
+
+![alt text](https://github.com/jonathansheets517/Demark_trading_indicator/blob/master/TY future covid timeframe.png?raw=true)
 
 **Step 1** - I recommend sourcing free historical crypto data from [CoinGeckoAPI](https://www.coingecko.com/en/api/documentation) combined with OHLC data from [Alpha Vantage API Key Generator](https://www.alphavantage.co/support/#api-key). **You'll need a free API key from alphaVantage.**
 
